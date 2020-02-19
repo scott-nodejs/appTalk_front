@@ -1,0 +1,91 @@
+{
+  "website": {
+      "website_name": "小随笔",
+      "domain_name": "https://www.xiaosuibi.com",
+      "introduction": "用文字沟通世界",
+      "miibeian": "粤ICP备19031505号",
+      "about": "https://github.com/maoxiaoquan/kite",
+      "feedback": "https://github.com/maoxiaoquan/kite/issues",
+      "logo": "https://www.xiaosuibi.com/default/img/xiaosuibi.png",
+      "description": "小随笔是一个优质的创作社区，在这里，你可以创作和学习还有分享，一篇文章、一首诗、一张照片、一幅画......每个人的创造力是无限的，发挥你的创造和想象力。",
+      "keywords": "小随笔、创作、学习、生活、娱乐、旅行"
+    },
+    "config": {
+      "on_login": "yes",
+      "on_register": "yes",
+      "on_comment": "yes",
+      "googleCode": "UA-150227013-1"
+    },
+    "notice": [
+      {
+        "option_id": "1",
+        "option_key": "notice",
+        "option_value": {
+          "title": "关于本站、以及安装教程、开源源码地址",
+          "link": "https://www.xiaosuibi.com/p/10000",
+          "enable": true
+        },
+        "create_date": "2019-07-14T18:06:20.000Z",
+        "create_timestamp": "1563127580"
+      },
+      {
+        "option_id": "3",
+        "option_key": "notice",
+        "option_value": {
+          "title": "如有违规，联系我马上修改",
+          "link": "https://www.xiaosuibi.com/p/10000",
+          "enable": true
+        },
+        "create_date": "2019-10-14T16:46:59.000Z",
+        "create_timestamp": "1571071619"
+      },
+      {
+        "option_id": "4",
+        "option_key": "notice",
+        "option_value": {
+          "title": "kite版本还在飞速迭代中，各位对于本站的意见和建议",
+          "link": "https://www.xiaosuibi.com/p/10037",
+          "img_url": "",
+          "enable": true
+        },
+        "create_date": "2019-10-31T03:59:21.000Z",
+        "create_timestamp": "1572494361"
+      },
+      {
+        "option_id": "5",
+        "option_key": "notice",
+        "option_value": {
+          "title": "建议意见交流群671489196",
+          "link": "https://www.xiaosuibi.com/p/10041",
+          "enable": true
+        },
+        "create_date": "2019-10-31T08:07:45.000Z",
+        "create_timestamp": "1572509265"
+      },
+      {
+        "option_id": "6",
+        "option_key": "notice",
+        "option_value": {
+          "title": "友情链接",
+          "link": "https://www.xiaosuibi.com/p/10050",
+          "img_url": "友情链接",
+          "enable": true
+        },
+        "create_date": "2019-11-27T02:53:00.000Z",
+        "create_timestamp": "1574823180"
+      },
+      {
+        "option_id": "7",
+        "option_key": "notice",
+        "option_value": {
+          "title": "0.9 版本开发计划（最新版本）",
+          "link": "https://www.xiaosuibi.com/p/10062",
+          "enable": true
+        },
+        "create_date": "2020-01-03T10:16:16.000Z",
+        "create_timestamp": "1578046576"
+      }
+    ],
+    "advertise": [
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "list":[
+      {
+        "tag_id":"dfOfficialExclusive",
+        "name":"官方专属",
+        "en_name":"official",
+        "icon":"/default/img/default_article_tag.png",
+        "description":"官方标签发布文章专属标签",
+        "subscribe_count":0,
+        "article_count":32
+      },
+      {
+        "tag_id":"6yCkvwNGP",
+        "name":"bug反馈",
+        "en_name":"bug_feedback",
+        "icon":"https://www.xiaosuibi.com/upload/admin-img-service/2019-7/1563647350288.png",
+        "description":"bug_feedback",
+        "subscribe_count":0,
+        "article_count":6
+      }
+    ]
+}
