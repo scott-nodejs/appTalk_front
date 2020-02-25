@@ -52,22 +52,9 @@ export default [
                 component: () => import('@views/AttentionMessage') // 关注
             },
             {
-                path: '/douban',
-                name:'comment',
-                component: resolve => require(['@views/ItemList/index.vue'], resolve).default
-            },
-            {
-                path: '/movie/:id',
-                component: resolve => require(['@views/Detail/index.vue'], resolve)
-            },
-            {
                 path: '/404',
                 name: '404',
                 component: resolve => require(['@views/Error/NotFound.vue'], resolve)
-            },
-            {
-                path: '*',
-                redirect: '/404'
             }
         ]
     },

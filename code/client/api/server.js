@@ -4,6 +4,9 @@ import qs from 'qs'
 export default {
     api: null,
     cookies: {},
+    getBaseUrl(){
+        return 'http://localhost:3000/api/'
+    },
     setCookies(value) {
         // value = value || {}
         // this.cookies = value
@@ -21,7 +24,7 @@ export default {
         if (!this.api) this.setCookies()
         return this.api({
             method: 'post',
-            url: "http://localhost:3000/api/"+url,
+            url: this.getBaseUrl()+url,
             data: data,
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +37,7 @@ export default {
         if (!this.api) this.setCookies()
         return this.api({
             method: 'post',
-            url: "http://localhost:3000/api/"+url,
+            url: this.getBaseUrl()+url,
             data: data,
             transformRequest:[function (data) {
                 return qs.stringify(data)
@@ -50,7 +53,7 @@ export default {
         if (!this.api) this.setCookies()
         return this.api({
             method: 'get',
-            url: "http://localhost:3000/api/"+url,
+            url: this.getBaseUrl()+url,
             params,
         }).then(res => {
             return res.data
@@ -60,7 +63,7 @@ export default {
         if (!this.api) this.setCookies()
         return this.api({
             method: 'put',
-            url: "http://localhost:3000/api/"+url,
+            url: baseURL+url,
             params,
         }).then(res => {
             return res.data
@@ -70,7 +73,7 @@ export default {
         if (!this.api) this.setCookies()
         return this.api({
             method: 'delete',
-            url: "http://localhost:3000/api/"+url,
+            url: this.getBaseUrl()+url,
             params,
         }).then(res => {
             return res.data
