@@ -36,7 +36,7 @@
           <router-link class="item"
                        v-for="(item,key) in  recommendArticle"
                        :key="key"
-                       :to="{name:'article',params:{aid:item.aid}}">
+                       :to="{name:'article',params:{aid:item.id}}">
             <div class="entry-title">
               {{item.title}}
             </div>

@@ -10,7 +10,7 @@
       </li>
     </ul>
 
-    <div class="right">
+    <!-- <div class="right">
       <router-link class="menu"
                    :to="{name:'home'}">
         <i class="el-icon-s-home"></i>
@@ -32,131 +32,131 @@
           <i slot="button"
              class="el-icon-menu"></i>
         </Popover>
-
       </span>
-    </div>
+    </div> -->
+
   </nav>
 </template>
 
 <script>
 
-import { Popover } from "@components";
-import { mapState } from 'vuex'
-export default {
-  name: "NavSort",
-  data () {
-    return {
-      faceVisible: false,
-      navList: [
-        {
-          name: "newest",
-          text: "最新"
+    import { Popover } from "@components";
+    import { mapState } from 'vuex'
+    export default {
+        name: "NavSort",
+        data () {
+            return {
+                faceVisible: false,
+                navList: [
+                    {
+                        name: "newest",
+                        text: "最新"
+                    },
+                    {
+                        name: "hottest",
+                        text: "全部热门"
+                    },
+                    {
+                        name: "monthlyHottest",
+                        text: "本月最热"
+                    }
+                ],
+                current_nav: "newest"
+            };
         },
-        {
-          name: "hottest",
-          text: "全部热门"
+        methods: {
+            dafauleNav () {
+                this.current_nav = "newest";
+            },
+            switchNav (val) {
+                this.faceVisible = false
+                if (this.articleColumn.currColumnEnName !== val.params.en_name) {
+                    this.$router.push(val)
+                }
+            },
+            _navTap (val) {
+                this.$emit("navTap", val);
+                this.current_nav = val;
+            }
         },
-        {
-          name: "monthlyHottest",
-          text: "本月最热"
+        computed: {
+            ...mapState(['articleColumn'])
+        },
+        components: {
+            Popover
         }
-      ],
-      current_nav: "newest"
     };
-  },
-  methods: {
-    dafauleNav () {
-      this.current_nav = "newest";
-    },
-    switchNav (val) {
-      this.faceVisible = false
-      if (this.articleColumn.currColumnEnName !== val.params.en_name) {
-        this.$router.push(val)
-      }
-    },
-    _navTap (val) {
-      this.$emit("navTap", val);
-      this.current_nav = val;
-    }
-  },
-  computed: {
-    ...mapState(['articleColumn'])
-  },
-  components: {
-    Popover
-  }
-};
 </script>
 
 <style scoped lang="scss">
-.list-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 25px;
-  border-bottom: 1px solid rgba(178, 186, 194, 0.15);
-  .nav-list {
-    align-items: center;
-    line-height: 1;
-    position: relative;
+  .list-nav {
     display: flex;
     justify-content: space-between;
-    padding: 25px 0;
-    .active {
-      a {
-        color: #ea6f5a;
+    padding: 0 25px;
+    border-bottom: 1px solid rgba(178, 186, 194, 0.15);
+    .nav-list {
+      align-items: center;
+      line-height: 1;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0;
+      .active {
+        a {
+          color: #ea6f5a;
+        }
+      }
+    }
+    .left {
+      .nav-item {
+        padding: 0 15px;
+        font-size: 14px;
+        border-right: 1px solid hsla(0, 0%, 59.2%, 0.2);
+        &:first-child {
+          padding-left: 0;
+        }
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      .menu {
+        width: 50px;
+        display: inline-block;
+        text-align: center;
+        line-height: 50px;
+        height: 50px;
+        cursor: pointer;
+        i {
+          font-size: 18px;
+          color: #666;
+        }
+        /deep/.pop-view {
+          right: 0;
+          width: 500px;
+        }
       }
     }
   }
-  .left {
-    .nav-item {
-      padding: 0 15px;
-      font-size: 14px;
-      border-right: 1px solid hsla(0, 0%, 59.2%, 0.2);
-      &:first-child {
-        padding-left: 0;
-      }
-      &:last-child {
-        border-right: none;
-      }
-    }
-  }
-  .right {
-    display: flex;
-    align-items: center;
-    .menu {
-      width: 50px;
-      display: inline-block;
-      text-align: center;
-      line-height: 50px;
-      height: 50px;
-      cursor: pointer;
-      i {
-        font-size: 18px;
-        color: #666;
-      }
-      /deep/.pop-view {
-        right: 0;
-        width: 500px;
-      }
-    }
-  }
-}
 
-.nav-items {
-  a,
-  span {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 14px;
-    padding: 5px 10px;
-    border-radius: 3px;
-    background: #f1f1f1;
-    margin-bottom: 10px;
-    &.active {
-      font-weight: 500;
-      color: #f46e65;
-      background-color: #f46e653b;
+  .nav-items {
+    a,
+    span {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 14px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      background: #f1f1f1;
+      margin-bottom: 10px;
+      &.active {
+        font-weight: 500;
+        color: #f46e65;
+        background-color: #f46e653b;
+      }
     }
   }
-}
 </style>

@@ -9,6 +9,11 @@ export default [
                 component: require('@views/Home/Home').default // 主页
             },
             {
+                path: '/column/:en_name',
+                name: 'column',
+                component: require('@views/Home/Column').default // 主页
+            },
+            {
                 path: 'p/:aid',
                 name: 'article',
                 component: require('@views/Article/Article').default // 文章内容页

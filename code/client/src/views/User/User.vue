@@ -132,8 +132,6 @@
               </ul>
 
               <BlogView v-if="$route.params.routeType === 'blog'" />
-              <BooksView v-else-if="$route.params.routeType === 'books'" />
-              <DynamicView v-else-if="$route.params.routeType === 'dynamic'" />
               <UserAttentionView v-else-if="$route.params.routeType === 'attention'" />
               <UserMessageView v-else-if="$route.params.routeType === 'message'" />
               <ArticleView v-else />

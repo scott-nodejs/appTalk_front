@@ -37,6 +37,7 @@
 <script>
     import HomeAside from "@views/Home/HomeAside";
     import NavHeader from "@views/Home/NavHeader";
+    import NavColumn from "@views/Home/NavColumn";
     import ArticleItem from "@views/Article/component/ArticleItem";
     import { mapState } from "vuex";
     import { ScrollLoading } from "@components";
@@ -101,6 +102,7 @@
         components: {
             HomeAside,
             NavHeader,
+            NavColumn,
             ArticleItem,
             ScrollLoading
         }

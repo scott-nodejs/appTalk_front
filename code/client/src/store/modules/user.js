@@ -57,7 +57,7 @@ const actions = {
 
   async  GET_UNREAD_MESSAGE_COUNT ({ commit, dispatch, state }, data){
         // 获取用户未读消息数量
-        const res = await api.get('/api/attentionMessage/count')
+        const res = await api.get('/attentionMessage/count')
         commit('SET_UNREAD_MESSAGE_COUNT', res.data)
     },
 
@@ -184,7 +184,7 @@ const actions = {
   },
   async GET_ASSOCIATE_INFO ({ commit, dispatch, state }, parameter) {
       // 获取用户关联信息
-    const res = await api.get('/api/user/relate/count')
+    const res = await api.get('/user/relate/count')
     commit('SET_ASSOCIATE_INFO',res.data)
     return  res
   }

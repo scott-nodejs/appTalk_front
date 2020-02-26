@@ -22,7 +22,7 @@
                                     <router-link :to="{
                                       name: 'comment'
                                     }"
-                                                 class="nav-link">热评</router-link>
+                                                 class="nav-link">APP专区</router-link>
                                 </li>
                             </ul>
                         </li>
