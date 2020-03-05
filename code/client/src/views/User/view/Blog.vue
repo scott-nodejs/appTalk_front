@@ -15,7 +15,7 @@
             <router-link class="article-blog-icon"
                          :to="{
                 name: 'articleBlog',
-                params: { blogId: articleBlogItem.blog_id }
+                params: { blogId: articleBlogItem.id }
               }">
               <img class="article-blog-icon-img"
                    v-lazy="articleBlogItem.icon"
@@ -26,8 +26,8 @@
               <router-link class="name"
                            :to="{
                   name: 'articleBlog',
-                  params: { blogId: articleBlogItem.blog_id }
-                }">{{ articleBlogItem.name }}</router-link>
+                  params: { blogId: articleBlogItem.id }
+                }">{{ articleBlogItem.columnName }}</router-link>
 
               <div class="time-view">
                 <span class="time">{{ setBlogTime(articleBlogItem) }}</span>
@@ -37,7 +37,7 @@
             <div class="operat-view"
                  v-if="
                 personalInfo.islogin &&
-                  personalInfo.user.uid === articleBlogItem.user.uid
+                  personalInfo.user.id === articleBlogItem.user.id
               ">
               <Dropdown>
                 <div class="el-dropdown-link"
@@ -66,8 +66,8 @@
                            :key="key"
                            :to="{
                   name: 'article_tag',
-                  params: { en_name: itemArticleTag.en_name }
-                }">{{ itemArticleTag.name }}</router-link>
+                  params: { en_name: itemArticleTag.enName }
+                }">{{ itemArticleTag.tagName }}</router-link>
             </template>
             <template v-else>
               <span class="hint">
@@ -119,9 +119,9 @@
       </div>
     </div>
 
-    <Page :total="Number(articleBlog.count)"
+    <Page :total="Number(articleBlog.total)"
           :pageSize="Number(articleBlog.pageSize)"
-          :page="Number(articleBlog.page) || 1"
+          :page="Number(articleBlog.pageNum) || 1"
           @pageChange="pageChange"></Page>
 
     <!-- use the modal component, pass in the prop -->
@@ -133,14 +133,14 @@
         <div class="form-group">
           <label for="blog-name-input">专题名字：</label>
           <input type="email"
-                 v-model="blogForm.blog_name"
+                 v-model="blogForm.columnName"
                  class="form-control"
                  placeholder="请输入个人文章专题名字" />
         </div>
         <div class="form-group">
           <label for="blog-name-input">专题英文名字：</label>
           <input type="email"
-                 v-model="blogForm.en_name"
+                 v-model="blogForm.columnEnglish"
                  class="form-control"
                  placeholder="请输入个人文章专题英文名字" />
         </div>
@@ -162,12 +162,12 @@
 
         <div class="form-group">
           <label for="blog-name-input">选择标签：</label>
-          <select v-model="blogForm.tag_ids"
+          <select v-model="blogForm.tagId"
                   placeholder="请选择">
             <option v-for="(item, key) in articleTagAll"
                     :key="key"
-                    :label="item.name"
-                    :value="item.tag_id">
+                    :label="item.tagName"
+                    :value="item.id">
             </option>
           </select>
         </div>
@@ -206,8 +206,7 @@ export default {
   name: 'Blog',
   async asyncData ({ store, route }) {
     return store.dispatch('user/GET_USER_ARTICLE_BLOG_LIST', {
-      uid: route.params.uid,
-      page: route.query.page || 1,
+      pageNum: route.query.pageNum || 1,
       pageSize: route.query.pageSize || 10
     })
   },
@@ -219,9 +218,9 @@ export default {
       isLoading: false,
       articleBlog: {
         // 个人中心个人专栏列表
-        count: 0,
+        total: 0,
         list: [],
-        page: 1,
+        pageNum: 1,
         pageSize: 10
       },
       blogForm: {
@@ -243,8 +242,7 @@ export default {
       this.isLoading = true
       this.$store
         .dispatch('user/GET_USER_ARTICLE_BLOG_LIST', {
-          uid: this.$route.params.uid,
-          page: this.articleBlog.page || 1,
+          pageNum: this.articleBlog.page || 1,
           pageSize: this.articleBlog.pageSize || 10
         })
         .then(result => {
@@ -303,7 +301,7 @@ export default {
           ...params
         })
         .then(result => {
-          if (result.state === 'success') {
+          if (result.status === 200) {
             this.isEdit = false
             this.$message.success(result.message)
             this.isCreateBlogShow = false

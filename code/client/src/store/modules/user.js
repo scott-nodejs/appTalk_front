@@ -79,13 +79,10 @@ const actions = {
       return result
     })
   },
-  CREATE_ARTICLE_BLOG: ({ commit, dispatch, state }, data) => {
+  async CREATE_ARTICLE_BLOG ({ commit, dispatch, state }, data) {
     // 创建用户个人文章专题
-    return fetch({
-      url: '/personal/create-article-blog',
-      method: 'post',
-      parameter: { ...data }
-    })
+    const res = await api.postJson('/api/column/add',data)
+    return res
   },
   UPDATE_ARTICLE_BLOG: ({ commit, dispatch, state }, data) => {
     // 更新用户个人文章专题
@@ -166,14 +163,12 @@ const actions = {
       parameter: { params: parameter }
     })
   },
-  GET_USER_ARTICLE_BLOG_LIST ({ commit, dispatch, state }, parameter) {
+  async GET_USER_ARTICLE_BLOG_LIST ({ commit, dispatch, state }, parameter) {
     // 获取用户的个人专栏列表
-    return fetch({
-      url: '/personal/article-blog-list',
-      method: 'get',
-      parameter: { params: parameter }
-    })
+    const res = await api.get('/api/column/pageList',parameter)
+    return res
   },
+
   GET_BOOKS_LIST ({ commit, dispatch, state }, parameter) {
     // 获取用户的个人专栏列表
     return fetch({

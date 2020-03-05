@@ -19,9 +19,7 @@
                                                  class="nav-link">首页</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link :to="{
-                                      name: 'comment'
-                                    }"
+                                    <router-link :to="{ name: 'app', params: { columnEnName: 'all' } }"
                                                  class="nav-link">APP专区</router-link>
                                 </li>
                             </ul>

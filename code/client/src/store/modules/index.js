@@ -10,10 +10,13 @@ import editor from './editor'
 import setting from './setting'
 import global from './global'
 import common from './common'
+import articleTag from './articleTag'
+import apps from './apps'
 export default {
     home,
     articleColumn,
     website,
+    articleTag,
     article,
     sign,
     articleComment,
@@ -22,5 +25,6 @@ export default {
     setting,
     global,
     common,
+    apps,
     graphql
 }

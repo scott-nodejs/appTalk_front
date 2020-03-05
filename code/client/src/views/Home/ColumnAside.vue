@@ -31,7 +31,7 @@
           <router-link v-for="(itemTag,key) in articleColumn.column.tag"
                        class="tag-class frontend"
                        :key="key"
-                       :to="{name:'article_tag',params:{en_name:itemTag.en_name}}">{{itemTag.name}}</router-link>
+                       :to="{name:'article_tag',params:{en_name:itemTag.en_name}}">{{itemTag.tagName}}</router-link>
         </div>
       </div>
     </div>

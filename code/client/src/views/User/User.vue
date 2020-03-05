@@ -85,7 +85,7 @@
                       <div class="meta-block">
                         <router-link :to="{ name: 'shellDetail' }">
                           <p>0</p>
-                          <strong>贝壳余额</strong>
+                          <strong>账户余额</strong>
                         </router-link>
                       </div>
                     </li>
@@ -101,16 +101,16 @@
                     文章
                   </router-link>
                 </li>
-                <li>
-                  <router-link :to="{ name: 'user', params: { routeType: 'dynamic' } }">
-                    片刻
-                  </router-link>
-                </li>
-                <li>
-                  <router-link :to="{ name: 'user', params: { routeType: 'books' } }">
-                    小书
-                  </router-link>
-                </li>
+                <!--<li>-->
+                  <!--<router-link :to="{ name: 'user', params: { routeType: 'dynamic' } }">-->
+                    <!--片刻-->
+                  <!--</router-link>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<router-link :to="{ name: 'user', params: { routeType: 'books' } }">-->
+                    <!--小书-->
+                  <!--</router-link>-->
+                <!--</li>-->
                 <li>
                   <router-link :to="{ name: 'user', params: { routeType: 'blog' } }">
                     个人专栏

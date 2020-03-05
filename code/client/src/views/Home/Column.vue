@@ -87,12 +87,13 @@
                     route.params.en_name || ""
                 ),
                 store.commit("home/SET_INIT_INDEX_ARTICLE_LIST"), // 重置文章列表数据
-                store.dispatch("articleColumn/GET_ARTICLE_COLUMN_ALL"),
-                store.dispatch("articleColumn/GET_ARTICLE_COLUMN", {
-                    en_name: route.params.en_name || ""
-                }),
+                store.dispatch("articleColumn/GET_ARTICLE_COLUMN_ALL",{pageNum:1,pageSize:10}),
+                // store.dispatch("articleColumn/GET_ARTICLE_COLUMN", {
+                //     en_name: route.params.en_name || ""
+                // }),
                 store.dispatch("home/GET_INDEX_COLUMN_ARTICLE_LIST", {
-                    columnEnName: route.params.en_name || ""
+                    // columnEnName: route.params.en_name || ""
+                    pageNum:1
                 })
             ]);
         },

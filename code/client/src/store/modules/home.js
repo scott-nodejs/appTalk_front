@@ -38,18 +38,17 @@ const actions = {
     // 获取首页 专栏页 文章列表
         const res = await api.get('article/pageList',parameter)
         commit('SET_INDEX_ARTICLE_LIST', res.data)
-  },
-  GET_POPULAR_ARTICLE_TAG ({ commit, dispatch, state }, parameter = {}) {
+    },
+    async GET_INDEX_COLUMN_ARTICLE_LIST ({ commit, dispatch, state }, parameter = {}) {
+        // 获取首页 专栏页 文章列表
+        const res = await api.get('article/pageList',parameter)
+        commit('SET_INDEX_ARTICLE_LIST', res.data)
+    },
+  async GET_POPULAR_ARTICLE_TAG ({ commit, dispatch, state }, parameter = {}) {
     // 获取热门文章标签
-      return new Promise( (resolve, reject) => {
-          axios.get('article-tag/popular-list')
-              .then( res => {
-                  commit('SET_POPULAR_ARTICLE_TAG', res.data.list)
-                  resolve(res)
-              }).catch(e =>{
-              reject(e)
-          })
-      })
+      const res = await api.get("/allTags")
+      commit('SET_POPULAR_ARTICLE_TAG', res.data)
+      return res
   }
 }
 

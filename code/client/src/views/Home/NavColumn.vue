@@ -4,8 +4,8 @@
       <a class="nav-item"
          v-for="column_item in navItem"
          :key="column_item.column_id"
-         @click="switchNav({name:'column',params:{en_name:column_item.en_name}})"
-         :class="{'active':currColumnEnName===column_item.en_name}">
+         @click="switchNav({name:'column',params:{en_name:column_item.enName}})"
+         :class="{'active':currColumnEnName===column_item.enName}">
         {{column_item.name}}
       </a>
     </div>

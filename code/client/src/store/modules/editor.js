@@ -6,13 +6,10 @@ const state = () => ({})
 const mutations = {}
 
 const actions = {
-  GET_USER_BLOG: ({ commit, dispatch, state }, { uid }) => {
+  async GET_USER_BLOG ({ commit, dispatch, state }, { uid }) {
     // 获取文章专题
-    return fetch({
-      url: '/user/blog-all',
-      method: 'get',
-      parameter: { params: { uid } }
-    })
+    const res = await api.get('/api/column/all')
+    return res
   },
   CREATE_ARTICLE_BLOG: ({ commit, dispatch, state }, data) => {
     return fetch({

@@ -43,7 +43,7 @@
             :key="key">
           <router-link class="link xzl-link-color"
                        :to="{name:'article_tag',params:{en_name:item.en_name}}">
-            {{item.name}}
+            {{item.tagName}}
           </router-link>
         </li>
       </ul>

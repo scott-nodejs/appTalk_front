@@ -14,9 +14,24 @@ export default [
                 component: require('@views/Home/Column').default // 主页
             },
             {
+                path: 'app/:columnEnName',
+                name: 'app',
+                component: () => import('@views/Apps/Apps') // 小书首页
+            },
+            {
                 path: 'p/:aid',
                 name: 'article',
                 component: require('@views/Article/Article').default // 文章内容页
+            },
+            {
+                path: 'app/:appid',
+                name: 'app_detail',
+                component: require('@views/Apps/AppDetail').default // 文章标签内容页
+            },
+            {
+                path: 'app-write/:type',
+                name: 'appWrite',
+                component: () => import('@views/Apps/WriteApps') // 小书创建修改
             },
             {
                 path: 'subscribe/:type',
@@ -55,6 +70,11 @@ export default [
                 path: 'user-attention',
                 name: 'AttentionMessage',
                 component: () => import('@views/AttentionMessage') // 关注
+            },
+            {
+                path: 'app-desc/:apps_id',
+                name: 'app-desc',
+                component: require('@views/App/App').default // App详情
             },
             {
                 path: '/404',

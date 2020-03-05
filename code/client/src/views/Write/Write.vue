@@ -56,9 +56,9 @@
                    for="">个人专栏（非必选）</label>
             <select class="box-select"
                     v-model="write.blog_ids">
-              <option :value="item.blog_id"
+              <option :value="item.id"
                       v-for="(item, key) in userArticleBlogAll"
-                      :key="key">{{ item.name }}</option>
+                      :key="key">{{ item.columnName }}</option>
             </select>
             <div class="create-blog">
               <div class="create-blog-view"
@@ -94,7 +94,7 @@
             </select>
           </div>
         </div>
-       <!--
+
         <div class="tag-warp">
           <p class="common-title">
             文章标签
@@ -110,7 +110,7 @@
               <span class="tag-item"
                     v-for="(item, key) in currentArticleTagArr"
                     :key="key"
-                    @click="deleteCurrentArticleTag(item)">{{ item.name }}</span>
+                    @click="deleteCurrentArticleTag(item)">{{ item.tagName }}</span>
             </div>
             <input class="search-input"
                    v-show="currentArticleTagArr.length < 3"
@@ -132,11 +132,11 @@
               <span class="tag-item"
                     v-for="(item, key) in searchShowArticleTagAll"
                     :key="key"
-                    @click="addArticleTag(item)">{{ item.name }}</span>
+                    @click="addArticleTag(item)">{{ item.tagName }}</span>
             </div>
           </div>
         </div>
-        -->
+
         <div class="write-footer clearfix">
           <button class="send-article"
                   @click="saveArticle">发布文章</button>
@@ -173,7 +173,7 @@ export default {
     // 触发 action 后，会返回 Promise
     return Promise.all([
       store.dispatch('PERSONAL_INFO', { accessToken }),
-      // store.dispatch('articleTag/GET_ARTICLE_TAG_ALL')
+      store.dispatch('articleTag/GET_ARTICLE_TAG_ALL')
     ])
   },
   data () {
@@ -185,7 +185,7 @@ export default {
         blog_ids: '', // 文章所属专栏ID
         type: '1', // 文章的类型
         is_public: 1, // 是否公开 1公开 0仅自己可见
-        appName: ''
+        appName: '',
       },
       publicTypeList: ['仅自己可见', '公开'], // 文章类型列表
       articleTypeList: articleTypeText,
@@ -205,22 +205,6 @@ export default {
           text: '转载'
         }
       ],
-        appList: [
-            // 文章来源
-            // whether to display create blog btn and input 文章类型列表
-            {
-                id: '1',
-                text: '什么值得买'
-            },
-            {
-                id: '2',
-                text: '宝宝树'
-            },
-            {
-                id: '3',
-                text: '微信'
-            },
-        ],
       isCreateBlogShow: false, // 是否显示创建blog
       searchArticleTag: '',
       currentArticleTagArr: [], // 用户选中的文章标签
@@ -316,21 +300,21 @@ export default {
       }
       this.$store
         .dispatch('editor/GET_USER_BLOG', {
-          uid: this.$store.state.personalInfo.user.uid
+          uid: this.$store.state.personalInfo.user.id
         })
         .then(res => {
-          this.userArticleBlogAll = res.data.list
+          this.userArticleBlogAll = res.data
         })
     },
     addArticleTag (val) {
       this.search_article_tag = ''
       let _arr = []
       for (var item in this.currentArticleTagArr) {
-        _arr.push(this.currentArticleTagArr[item].name)
+        _arr.push(this.currentArticleTagArr[item].tagName)
       }
       if (
         this.currentArticleTagArr.length < 3 &&
-        _arr.indexOf(val.name) === -1
+        _arr.indexOf(val.tagName) === -1
       ) {
         this.currentArticleTagArr.push(val)
       }
@@ -356,7 +340,7 @@ export default {
     getObjectValues (object) {
       var values = []
       for (var property in object) {
-        values.push(object[property].tag_id)
+        values.push(object[property].id)
       }
       return values
     },
@@ -446,9 +430,9 @@ export default {
         source: this.write.source, // 来源 （1原创 2转载）
         type: this.write.type, // 类型 （1:文章;2:日记,3:草稿 ）
         isPublic: this.write.is_public,
-        appName: this.write.appName
-        // blog_ids: this.write.blog_ids,
-        // tag_ids: this.getObjectValues(this.currentArticleTagArr).join(',')
+        appName: this.write.appName,
+          columnId: this.write.blog_ids,
+          tagIds: this.getObjectValues(this.currentArticleTagArr).join(',')
       }
       this.$route.params.type !== 'create' &&
         (params.id = this.$route.params.type)
@@ -483,7 +467,7 @@ export default {
   },
   computed: {
     articleTagAll () {
-      // return this.$store.state.articleTag.article_tag_all
+      return this.$store.state.articleTag.article_tag_all
     },
     personalInfo () {
       // 登录后的个人信息
