@@ -36,12 +36,12 @@ const mutations = {
 const actions = {
     async GET_INDEX_ARTICLE_LIST ({ commit, dispatch, rootState:{ $api } }, parameter) {
     // 获取首页 专栏页 文章列表
-        const res = await api.get('article/pageList',parameter)
+        const res = await api.get('recommend/pageList',parameter)
         commit('SET_INDEX_ARTICLE_LIST', res.data)
     },
     async GET_INDEX_COLUMN_ARTICLE_LIST ({ commit, dispatch, state }, parameter = {}) {
         // 获取首页 专栏页 文章列表
-        const res = await api.get('article/pageList',parameter)
+        const res = await api.get('category-articles',parameter)
         commit('SET_INDEX_ARTICLE_LIST', res.data)
     },
   async GET_POPULAR_ARTICLE_TAG ({ commit, dispatch, state }, parameter = {}) {

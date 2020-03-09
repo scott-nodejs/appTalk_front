@@ -49,24 +49,24 @@
                 faceVisible: false,
                 navList: [
                     {
-                        name: "newest",
+                        name: "1",
                         text: "最新"
                     },
                     {
-                        name: "hottest",
+                        name: "2",
                         text: "全部热门"
                     },
                     {
-                        name: "monthlyHottest",
+                        name: "3",
                         text: "本月最热"
                     }
                 ],
-                current_nav: "newest"
+                current_nav: "1"
             };
         },
         methods: {
             dafauleNav () {
-                this.current_nav = "newest";
+                this.current_nav = "1";
             },
             switchNav (val) {
                 this.faceVisible = false

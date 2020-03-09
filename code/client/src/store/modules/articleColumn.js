@@ -17,7 +17,7 @@ const state = () => ({
 const mutations = {
   SET_ARTICLE_COLUMN (state, data) {
     // 设置获取的文章专栏
-    state.column = data.view
+    state.column = data
   },
   SET_ARTICLE_COLUMN_ALL (state, data) {
     // 设置获取的文章专栏
@@ -34,17 +34,11 @@ const mutations = {
 }
 
 const actions = {
-  GET_ARTICLE_COLUMN ({ commit, dispatch, state }, parameter) {
+  async GET_ARTICLE_COLUMN ({ commit, dispatch, state }, parameter) {
     // 获取文章专栏
-      return new Promise( (resolve, reject) => {
-          axios.get('article/column')
-              .then( res => {
-                  commit('SET_ARTICLE_COLUMN', res.data)
-                  resolve(res)
-              }).catch(e =>{
-              reject(e)
-          })
-      }).catch(error => console.log('caught', error))
+      const res = await api.get('tags',parameter)
+      commit('SET_ARTICLE_COLUMN', res.data)
+      return res
   },
   async GET_ARTICLE_COLUMN_ALL ({ commit, dispatch, state }, parameter) {
     // 获取文章专栏

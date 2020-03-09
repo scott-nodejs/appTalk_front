@@ -1,9 +1,10 @@
 import axios from "../../utils/fetch";
+import api from '@api/server'
 
 const state = () => ({
   meta: {},
   config: {},
-  notice: [],
+  notices: [],
   advertise: []
 })
 
@@ -20,9 +21,9 @@ const mutations = {
     //  设置网站通知信息
     let arr = []
     data.map(item => {
-      arr.push(JSON.parse(item.option_value))
+      arr.push(JSON.parse(item.optionValue))
     })
-    state.notice = arr
+    state.notices = arr
   },
   SET_ADVERTISE_LIST (state, data) {
     //  设置网站通知信息
@@ -35,20 +36,14 @@ const mutations = {
 }
 
 const actions = {
-  GET_WEBSITE_INFO ({ commit, dispatch, state }) {
+  async GET_WEBSITE_INFO ({ commit, dispatch, state }) {
     // 获取网站信息
-      return new Promise( (resolve, reject) => {
-          axios.get('website/info')
-              .then( result => {
-                  commit('SET_WEBSITE_INFO', result.data.website)
-                  commit('SET_WEBSITE_CONFIG', result.data.config)
-                  commit('SET_NOTICE_LIST', result.data.notice)
-                  commit('SET_ADVERTISE_LIST', result.data.advertise)
-                  resolve(result)
-              }).catch(e =>{
-              reject(e)
-          })
-      }).catch(error => console.log('caught', error))
+      const result = await api.get('configs')
+      commit('SET_WEBSITE_INFO', result.data.website)
+      commit('SET_WEBSITE_CONFIG', result.data.config)
+      commit('SET_NOTICE_LIST', result.data.notices)
+      // commit('SET_ADVERTISE_LIST', result.data.advertise)
+      return result
   }
 }
 

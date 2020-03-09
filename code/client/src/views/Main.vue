@@ -13,7 +13,7 @@
             // 触发 action 后，会返回 Promise
             return Promise.all([
                 store.dispatch('PERSONAL_INFO',{ accessToken }),
-                // store.dispatch('website/GET_WEBSITE_INFO'),
+                store.dispatch('website/GET_WEBSITE_INFO'),
             ])
         },
         mounted() {

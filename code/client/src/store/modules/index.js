@@ -7,6 +7,7 @@ import graphql from './graphql'
 import articleComment from './articleComment'
 import user from './user'
 import editor from './editor'
+import search from './search'
 import setting from './setting'
 import global from './global'
 import common from './common'
@@ -26,5 +27,6 @@ export default {
     global,
     common,
     apps,
+    search,
     graphql
 }

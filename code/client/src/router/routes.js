@@ -34,6 +34,11 @@ export default [
                 component: () => import('@views/Apps/WriteApps') // 小书创建修改
             },
             {
+                path: 'search',
+                name: 'search',
+                component: () => import('@views/Search/view/Search') // 搜索页
+            },
+            {
                 path: 'subscribe/:type',
                 name: 'subscribe_tag',
                 component: require('@views/Home/Home') // 文章标签订阅页

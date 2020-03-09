@@ -28,6 +28,6 @@ export default app => {
     app.use(bodyParser())
 
     //静态文件中间件
-    app.use(staticFiles(path.resolve(__dirname, '../../../public')))
+    app.use(staticFiles(path.resolve(__dirname, '../../../static')))
 }
 

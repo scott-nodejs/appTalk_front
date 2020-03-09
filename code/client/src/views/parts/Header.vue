@@ -33,8 +33,7 @@
                                        name="search"
                                        placeholder="搜索文章"
                                        aria-label="Search" />
-                                <button class="search-btn"
-                                        >
+                                <button class="search-btn" @click="search">
                                     <i class="el-icon-search"></i>
                                 </button>
                             </div>

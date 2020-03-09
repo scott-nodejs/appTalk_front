@@ -6,7 +6,7 @@
                 <div class="col-xs-12 col-sm-8--4 col-md-8--4">
                     <!--home-lay layout-content start-->
                     <section class="home-main  layout-content client-card">
-                        <NavHeader :navItem="articleColumn.homeColumn" />
+                        <NavHeader />
 
                         <div class="article-view">
                             <scroll-loading @scroll-loading="infiniteHandler"
@@ -80,7 +80,7 @@
                 this.isLoading = true;
                 this.$store
                     .dispatch("home/GET_INDEX_ARTICLE_LIST", {
-                        // column_en_name: this.$route.params.en_name,
+                        column_en_name: this.$route.params.en_name,
                         pageNum: this.page
                     })
                     .then(result => {

@@ -50,9 +50,9 @@
     </div>
 
     <div class="notice client-card-shadow"
-         v-if="website.notice.length>0">
+         v-if="website.notices.length>0">
       <a class="notice-item"
-         v-for="(item,key) in website.notice"
+         v-for="(item,key) in website.notices"
          v-if="item.enable"
          :href="item.link"
          :key="key">{{item.title}}</a>
@@ -94,7 +94,7 @@
              target="_blank">{{website.meta.miibeian}}</a></li>
       </ul>
       <ul class="more-list">
-        <li class="item"><a>©{{currYear}} {{website.meta.website_name}}</a></li>
+        <li class="item"><a>©{{currYear}} {{website.meta.websiteName}}</a></li>
       </ul>
 
     </div>

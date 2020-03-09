@@ -27,11 +27,11 @@
         </p>
 
         <div class="column-tag"
-             v-if="articleColumn.column.tag_ids">
-          <router-link v-for="(itemTag,key) in articleColumn.column.tag"
+             v-if="articleColumn.column.tags">
+          <router-link v-for="(itemTag,key) in articleColumn.column.tags"
                        class="tag-class frontend"
                        :key="key"
-                       :to="{name:'article_tag',params:{en_name:itemTag.en_name}}">{{itemTag.tagName}}</router-link>
+                       :to="{name:'article_tag',params:{en_name:itemTag.enName}}">{{itemTag.tagName}}</router-link>
         </div>
       </div>
     </div>
