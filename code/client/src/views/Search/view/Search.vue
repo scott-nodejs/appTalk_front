@@ -51,7 +51,7 @@
 <script>
 import ArticleItem from '@views/Article/component/ArticleItem'
 import { Page } from '@components'
-import websiteNotice from '../../Parts/websiteNotice'
+import websiteNotice from '../../parts/websiteNotice'
 import { mapState } from 'vuex'
 export default {
   name: 'Search',
