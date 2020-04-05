@@ -36,10 +36,10 @@
           <router-link class="avatar"
                        :to="{
               name: 'user',
-              params: { uid: item.user.id, routeType: 'article' }
+              params: { uid: item.userId, routeType: 'article' }
             }">
             <div class="avatar-img"
-                 :style="`background-image: url(${item.user.photo});`"></div>
+                 :style="`background-image: url(${item.photo});`"></div>
           </router-link>
           <router-link class="dynamic"
                        :to='{ name: "article", params: { aid: item.articleId }}'>
