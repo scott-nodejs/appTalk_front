@@ -17,6 +17,11 @@ const actions = {
     const res = await api.postJson("api/comment/add",parameter)
     return res.data
   },
+    async HOT_ARTICLE_COMMENTS ({ commit, dispatch, state }, parameter) {
+        // 新增评论
+        const res = await api.get("comment/hot")
+        return res
+    },
   ARTICLE_COMMENT_DELETE ({ commit, dispatch, state }, parameter) {
     // 删除文章评论
     return fetch({

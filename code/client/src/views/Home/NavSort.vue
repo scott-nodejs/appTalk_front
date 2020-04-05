@@ -1,6 +1,22 @@
 <template>
   <nav class="list-nav">
+
     <ul class="nav-list left">
+      <li class="nav-item"
+          :class="{'active':!$route.query.type}">
+        <router-link :to="{name:$route.name,params:{en_name:$route.params.en_name}}">全部</router-link>
+      </li>
+      <li class="nav-item"
+          v-for="item in articleType"
+          :key="item"
+          :class="{'active':$route.query.type==item}">
+        <router-link :to="{name:$route.name,params:{en_name:$route.params.en_name},query:{type:item}}">
+          {{articleTypeText[item]}}
+        </router-link>
+      </li>
+    </ul>
+
+    <ul class="nav-list right">
       <li class="nav-item"
           v-for="(item,key) in navList"
           :key="key"
@@ -10,31 +26,6 @@
       </li>
     </ul>
 
-    <!-- <div class="right">
-      <router-link class="menu"
-                   :to="{name:'home'}">
-        <i class="el-icon-s-home"></i>
-      </router-link>
-      <span class="menu">
-        <Popover :visible.sync="faceVisible">
-          <div class="nav-items">
-            <span v-for="columnItem in articleColumn.homeColumn"
-                  :key="columnItem.column_id"
-                  :class="{'active':articleColumn.currColumnEnName===columnItem.en_name}"
-                  @click="switchNav({name:'column',params:{en_name:columnItem.en_name}})">
-              {{columnItem.name}}
-            </span>
-            <router-link :to="{name:'columnAll'}">
-              更多...
-            </router-link>
-          </div>
-
-          <i slot="button"
-             class="el-icon-menu"></i>
-        </Popover>
-      </span>
-    </div> -->
-
   </nav>
 </template>
 
@@ -42,37 +33,37 @@
 
     import { Popover } from "@components";
     import { mapState } from 'vuex'
+    import {
+        articleType,
+        articleTypeText
+    } from '@utils/constant'
     export default {
         name: "NavSort",
         data () {
             return {
                 faceVisible: false,
+                articleType,
+                articleTypeText,
                 navList: [
                     {
-                        name: "1",
+                        name: "newest",
                         text: "最新"
                     },
                     {
-                        name: "2",
+                        name: "hottest",
                         text: "全部热门"
                     },
                     {
-                        name: "3",
+                        name: "monthlyHottest",
                         text: "本月最热"
                     }
                 ],
-                current_nav: "1"
+                current_nav: "newest"
             };
         },
         methods: {
             dafauleNav () {
-                this.current_nav = "1";
-            },
-            switchNav (val) {
-                this.faceVisible = false
-                if (this.articleColumn.currColumnEnName !== val.params.en_name) {
-                    this.$router.push(val)
-                }
+                this.current_nav = "newest";
             },
             _navTap (val) {
                 this.$emit("navTap", val);
@@ -92,7 +83,7 @@
   .list-nav {
     display: flex;
     justify-content: space-between;
-    padding: 0 25px;
+    padding: 0 12px;
     border-bottom: 1px solid rgba(178, 186, 194, 0.15);
     .nav-list {
       align-items: center;
@@ -100,18 +91,18 @@
       position: relative;
       display: flex;
       justify-content: space-between;
-      padding: 25px 0;
+      padding: 15px 0;
       .active {
         a {
           color: #ea6f5a;
         }
       }
     }
-    .left {
+    .left,
+    .right {
       .nav-item {
-        padding: 0 15px;
+        padding: 0 12px;
         font-size: 14px;
-        border-right: 1px solid hsla(0, 0%, 59.2%, 0.2);
         &:first-child {
           padding-left: 0;
         }
@@ -120,43 +111,15 @@
         }
       }
     }
-    .right {
-      display: flex;
-      align-items: center;
-      .menu {
-        width: 50px;
-        display: inline-block;
-        text-align: center;
-        line-height: 50px;
-        height: 50px;
-        cursor: pointer;
-        i {
-          font-size: 18px;
-          color: #666;
-        }
-        /deep/.pop-view {
-          right: 0;
-          width: 500px;
-        }
-      }
-    }
   }
-
-  .nav-items {
-    a,
-    span {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 14px;
-      padding: 5px 10px;
-      border-radius: 3px;
-      background: #f1f1f1;
-      margin-bottom: 10px;
-      &.active {
-        font-weight: 500;
-        color: #f46e65;
-        background-color: #f46e653b;
-      }
+  @media (max-width: 575px) {
+    .list-nav .left .nav-item,
+    .list-nav .right .nav-item {
+      padding: 0px 5px;
+      font-size: 12px;
+    }
+    .list-nav .right {
+      display: none;
     }
   }
 </style>

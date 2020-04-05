@@ -289,7 +289,7 @@ export default {
       },
     changeUploadCoverImg (evfile) { // 上传封面图片
         //后端获取token
-        let cdnUrl = 'http://q5fkyk2h0.bkt.clouddn.com/'
+        let cdnUrl = 'http://img.appshuo.club/'
         this.$store
             .dispatch('setting/PERSONAL_UPLOAD_AVATAR').then(res=>{
             var uptoken = res.data.token

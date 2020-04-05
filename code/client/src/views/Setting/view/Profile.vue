@@ -237,7 +237,7 @@ export default {
       //选择文件后触发的事件
       zh_uploadFile_change(evfile){
           //后端获取token
-          let cdnUrl = 'http://q5fkyk2h0.bkt.clouddn.com/'
+          let cdnUrl = 'http://img.appshuo.club/'
           this.$store
               .dispatch('setting/PERSONAL_UPLOAD_AVATAR').then(res=>{
               var uptoken = res.data.token

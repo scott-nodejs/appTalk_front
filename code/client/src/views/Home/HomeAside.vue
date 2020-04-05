@@ -2,13 +2,13 @@
   <div class="home-lay layout-aside">
 
     <div class="aside-component client-card-shadow">
-      <h3 class="title">写下你想说的</h3>
+      <h3 class="as-title">写下你想说的</h3>
       <div class="issue-btn">
         <a href="javascript:;"
            @click="createDynamic"
            class="btn-dynamic">
           <i class="el-icon-chat-line-round"></i>
-          <span class="label-title">发片刻</span>
+          <span class="label-title">提问题</span>
         </a>
         <a href="javascript:;"
            @click="createArticle"
@@ -20,9 +20,35 @@
            @click="createBooks"
            class="btn-book">
           <i class="el-icon-notebook-2"></i>
-          <span class="label-title">撰小书</span>
+          <span class="label-title">推APP</span>
         </a>
       </div>
+    </div>
+
+    <div class="new-dynamic client-card">
+      <h3 class="as-title">
+        最热评论
+      </h3>
+      <ul class="dynamic-list">
+        <li class="item"
+            v-for="(item,key) in hotcomments"
+            :key="key">
+          <router-link class="avatar"
+                       :to="{
+              name: 'user',
+              params: { uid: item.user.id, routeType: 'article' }
+            }">
+            <div class="avatar-img"
+                 :style="`background-image: url(${item.user.photo});`"></div>
+          </router-link>
+          <router-link class="dynamic"
+                       :to='{ name: "article", params: { aid: item.articleId }}'>
+            <div class="content-box"
+                 v-html="item.content">
+            </div>
+          </router-link>
+        </li>
+      </ul>
     </div>
 
     <div class="hot-tags-for-sidebar client-card">
@@ -107,7 +133,20 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'HomeAside',
+  data() {
+      return {
+          hotcomments: []
+      }
+  },
+  mounted(){
+      this.getHotComments()
+  },
   methods: {
+    getHotComments(){
+        this.$store.dispatch("articleComment/HOT_ARTICLE_COMMENTS", { type: "new" }).then(result => {
+            this.hotcomments = result.data || []
+        })
+    },
     createDynamic () {
       if (!this.$store.state.personalInfo.islogin) {
         this.$router.push({ name: 'signIn' })
@@ -142,43 +181,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.layout-aside {
-  .notice {
-    padding: 24px;
-    background-color: #fff;
-    color: #8a6d3b;
-    margin-bottom: 10px;
-    .notice-item {
-      display: block;
-      line-height: 20px;
-      color: #8a6d3b;
-      font-size: 14px;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-  .advertise {
-    .advertise-item {
-      overflow: hidden;
-      margin-bottom: 10px;
-      .advertise-img {
-        border-radius: 12px;
-        overflow: hidden;
-        display: block;
-      }
-      .advertise-text {
-        font-size: 14px;
-        color: #666;
-      }
-    }
-  }
-  .aside-component {
-    margin-bottom: 10px;
-    padding: 24px;
-    transition: all 0.3s ease;
-    .title {
-      font-size: 16px;
+  .layout-aside {
+    .as-title {
+      font-size: 15px;
       line-height: 28px;
       color: rgba(0, 0, 0, 0.88);
       font-weight: normal;
@@ -196,128 +201,180 @@ export default {
         background: #ec7259;
       }
     }
-    .issue-btn {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      a {
+    .new-dynamic,
+    .notice,
+    .hot-tags-for-sidebar,
+    .aside-component,
+    .website-information {
+      padding: 20px;
+      background-color: #fff;
+      color: #8a6d3b;
+      margin-bottom: 10px;
+    }
+
+    .new-dynamic {
+      .dynamic-list {
+        .item {
+          display: flex;
+          padding-bottom: 8px;
+          margin-bottom: 8px;
+          border-bottom: 1px solid #f7f7f7;
+          &:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+          }
+          .avatar {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            margin-right: 10px;
+            .avatar-img {
+              height: 38px;
+              width: 38px;
+              border-radius: 3px 3px 3px 3px;
+              display: inline-block;
+              vertical-align: middle;
+              overflow: hidden;
+              background-color: rgba(0, 0, 0, 0.02);
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: 50%;
+            }
+          }
+          .dynamic {
+            line-height: 18px;
+            flex: 1;
+            font-size: 13px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+          }
+        }
+      }
+    }
+
+    .notice {
+      .notice-item {
+        display: block;
+        line-height: 20px;
+        color: #8a6d3b;
+        font-size: 13px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #f7f7f7;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .advertise {
+      .advertise-item {
+        overflow: hidden;
+        margin-bottom: 10px;
+        .advertise-img {
+          border-radius: 12px;
+          overflow: hidden;
+          display: block;
+        }
+        .advertise-text {
+          font-size: 14px;
+          color: #666;
+        }
+      }
+    }
+    .aside-component {
+      .issue-btn {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        a {
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          cursor: pointer;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          flex: 1;
+          text-align: center;
+          position: relative;
+          i {
+            margin-right: 10px;
+            font-size: 20px;
+            margin-bottom: 8px;
+          }
+          .label-title {
+            color: #333;
+            font-size: 14px;
+            display: block;
+          }
+        }
+      }
+    }
+
+    .hot-tags-for-sidebar {
+      .hot-tags-header {
+        position: relative;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
-        cursor: pointer;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        flex: 1;
-        padding: 10px 0;
-        text-align: center;
-        position: relative;
-        i {
-          margin-right: 10px;
-        }
-        .label-title {
-          color: #444;
-          font-size: 16px;
-          display: block;
+        line-height: 1;
+        .hot-tags-more {
+          margin-left: auto;
+          font-size: 14px;
+          margin-bottom: 16px;
+          color: #c7c7c7;
         }
       }
-    }
-  }
-
-  .hot-tags-for-sidebar {
-    margin-bottom: 10px;
-    padding: 24px;
-    transition: all 0.3s ease;
-    .hot-tags-header {
-      position: relative;
-      padding-bottom: 13px;
-      // border-bottom: 1px solid #ededed;
-      width: 100%;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      line-height: 1;
-      margin-bottom: 15px;
-      padding-left: 12px;
-      &::before {
-        content: "";
-        width: 4px;
-        height: 20px;
-        position: absolute;
-        left: 0;
-        border-radius: 2px;
-        background: #ec7259;
-      }
-      span.hot-tags-header-title {
-        font-weight: normal;
-        font-size: 16px;
-        color: #2d2d2f;
-        &:after {
-          position: absolute;
-          bottom: -1px;
-          left: 0;
-          right: 0;
-          height: 1px;
-          width: 64px;
-          background: #2d2d2f;
-          // content: "";
-        }
-      }
-      .hot-tags-more {
-        margin-left: auto;
-        font-size: 14px;
-        color: #c7c7c7;
-      }
-    }
-    ul.hot-sidebar-items li {
-      display: inline-block;
-      a {
-        border: 1px solid #f5f5f5;
-        border-radius: 17px;
-        height: 32px;
-        margin-right: 8px;
-        color: #888;
-        margin-bottom: 8px;
-        padding: 5px 10px;
-        background: rgba(0, 0, 0, 0.03);
-        line-height: 22px;
-        display: block;
-        font-size: 14px;
-      }
-    }
-  }
-
-  .website-information {
-    padding: 20px;
-    ul {
-      display: block;
-      li {
+      ul.hot-sidebar-items li {
         display: inline-block;
-        font-size: 14px;
-        margin-right: 30px;
-        margin-top: 10px;
         a {
-          color: rgba(0, 0, 0, 0.44) !important;
-          fill: rgba(0, 0, 0, 0.44) !important;
-          line-height: 20px;
+          border: 1px solid #f5f5f5;
+          border-radius: 4px;
+          margin-right: 8px;
+          color: #888;
+          margin-bottom: 8px;
+          padding: 3px 8px;
+          background: rgba(0, 0, 0, 0.03);
+          display: block;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .website-information {
+      ul {
+        display: block;
+        li {
+          display: inline-block;
+          font-size: 14px;
+          margin-right: 30px;
+          margin-top: 10px;
+          a {
+            color: rgba(0, 0, 0, 0.44) !important;
+            fill: rgba(0, 0, 0, 0.44) !important;
+            line-height: 20px;
+          }
         }
       }
     }
   }
-}
 
-@media (max-width: 575px) {
-  body {
-    .layout-aside {
-      display: none;
+  @media (max-width: 575px) {
+    body {
+      .layout-aside {
+        display: none;
+      }
     }
   }
-}
 </style>

@@ -16,17 +16,21 @@ export const statusListText = {
 }
 
 export const articleType = {
-  // 文章的类型
-  article: 1, // 文章
-  note: 2, // 笔记
-  draft: 3 // 草稿
+    // 文章的类型
+    article: 1, // 文章
+    walkthrough: 2, // 攻略
+    news: 3, // 新闻
+    knowledge: 4, // 小知识
+    function: 5 // 新功能发布
 }
 
 export const articleTypeText = {
-  // 文章的类型
-  [articleType.article]: '文章', // 文章
-  [articleType.note]: '笔记', // 笔记
-  [articleType.draft]: '草稿' // 草稿
+    // 文章的类型
+    [articleType.article]: '文章', // 文章
+    [articleType.walkthrough]: '攻略', // 攻略
+    [articleType.news]: '新闻', // 新闻
+    [articleType.knowledge]: '小知识', // 小知识
+    [articleType.function]: '新功能发布' // 新功能发布
 }
 
 export const dynamicType = {

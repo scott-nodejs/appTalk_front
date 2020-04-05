@@ -7,8 +7,9 @@
         <ul class="nav-item-view">
           <li class="nav-item"
               v-for="column_item in articleColumn.homeColumn"
-              :key="column_item.column_id">
-            <router-link :to="{name:'books',params:{columnEnName:column_item.en_name}}">
+              :key="column_item.column_id"
+              :class="{'active':column_item.enName===$route.query.columnEnName}">
+            <router-link :to="{name:'app',params:{columnEnName:column_item.enName}}">
               {{column_item.name}}
             </router-link>
           </li>
@@ -116,7 +117,7 @@
                 store.dispatch("articleColumn/GET_ARTICLE_COLUMN_ALL",{pageNum:1,pageSize:10}),
                 store.dispatch('apps/GET_APPS_LIST', {
                     pageNum: route.query.page || 1,
-                    // columnEnName: route.params.columnEnName || '',
+                    columnEnName: route.params.columnEnName || '',
                     // tagId: route.query.tagId || '',
                     // sort: route.query.sort || '',
                 })
@@ -232,7 +233,7 @@
                     query.sort = this.$route.query.sort
                 }
                 this.$router.push({
-                    name: 'books',
+                    name: 'app',
                     params: { columnEnName: this.$route.params.columnEnName },
                     query
                 })
