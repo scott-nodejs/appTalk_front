@@ -1,8 +1,8 @@
 const path = require('path')
 module.exports = {
     base: {
-        path: path.resolve(__dirname, '../public/client'),
-        publicPath: '/client/',
+        path: path.resolve(__dirname, '../public'),
+        publicPath: '/lient/c',
         assetsPath: 'static'
     },
     dev: {
