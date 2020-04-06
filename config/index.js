@@ -1,8 +1,8 @@
 const path = require('path')
 module.exports = {
     base: {
-        path: path.resolve(__dirname, '../public'),
-        publicPath: '/lient/c',
+        path: path.resolve(__dirname, '../public/client'),
+        publicPath: '/client/',
         assetsPath: 'static'
     },
     dev: {
@@ -14,7 +14,7 @@ module.exports = {
     },
     build: {
         env: 'production',
-        publicPath: '/',
+        publicPath: '/client/',
         assetsPath: 'static',
         assetsSubDirectory: 'static',
         devtoolType: 'source-map'
