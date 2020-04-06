@@ -43,11 +43,11 @@
             <div class="entry-meta-box">
               <div class="entry-meta">
                 <i class="el-icon-thumb icon"></i>
-                <span class="count">{{item.thumb_count}}</span>
+                <span class="count">{{item.applaudCount}}</span>
               </div>
               <div class="entry-meta">
                 <i class="el-icon-chat-dot-square icon"></i>
-                <span class="count">{{item.comment_count}}</span>
+                <span class="count">{{item.commentCount}}</span>
               </div>
             </div>
           </router-link>

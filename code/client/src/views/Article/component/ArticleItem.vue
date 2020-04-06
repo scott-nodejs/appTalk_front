@@ -15,9 +15,9 @@
         <li class="item">
           <router-link :to="{
               name: 'user',
-              params: { uid: articleItem.user.id, routeType: 'article' }
+              params: { uid: articleItem.userId, routeType: 'article' }
             }"
-                       class="name">{{ articleItem.user.nickname }}</router-link>
+                       class="name">{{ articleItem.nickname }}</router-link>
         </li>
         <li class="item">
           <time>{{ articleItem.dateString }}</time>
