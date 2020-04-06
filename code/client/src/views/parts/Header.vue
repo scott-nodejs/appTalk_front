@@ -10,8 +10,39 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-item-content mr-auto">
                         <li class="navbar-menu-content active">
-                            <div class="navbar-toggler">
-
+                            <div class="navbar-toggler" @click="isNavbarMenu = !isNavbarMenu">
+                                <Dropdown>
+                                    <div class="el-dropdown-link"
+                                         slot="button">
+                                        <i class="menu-icon el-icon-menu"></i>
+                                    </div>
+                                    <div class="dropdown-menu-view">
+                                        <router-link :to="{ name: 'home' }"
+                                                     class="dropdown-menu-item">首页</router-link>
+                                        <router-link :to="{ name: 'app', params: { columnEnName: 'all' } }"
+                                                     class="dropdown-menu-item">APP专区</router-link>
+                                        <router-link v-if="personalInfo.islogin"
+                                                     class="dropdown-menu-item"
+                                                     :to="{
+                                            name: 'AttentionMessage'
+                                          }">
+                                            关注
+                                            <span v-if="user.attentionCount > 0"
+                                                  class="unread-message-count">{{ user.attentionCount }}</span>
+                                        </router-link>
+                                        <router-link v-if="personalInfo.islogin"
+                                                     class="dropdown-menu-item"
+                                                     :to="{name: 'user',params: {
+                                                      uid: personalInfo.user.id,
+                                                      routeType: 'message'
+                                                    }
+                                                  }">
+                                            消息
+                                            <span v-if="user.messageCount > 0"
+                                                  class="unread-message-count">{{ user.messageCount }}</span>
+                                        </router-link>
+                                    </div>
+                                </Dropdown>
                             </div>
                             <ul class="navbar-menu">
                                 <li class="nav-item">
