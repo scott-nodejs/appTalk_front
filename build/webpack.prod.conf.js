@@ -12,7 +12,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 //一个拷贝文件的webpack插件！
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const utils = require('./utils')
 // 资源路径
 const assetsPath = dir => path.posix.join(prodConf.assetsPath, dir)
 
@@ -24,13 +25,27 @@ const prod = merge({}, baseConf, {
         //用于打包require.ensure(代码分割)方法中引入的模块
         chunkFilename: assetsPath('js/[name].[chunkhash].js')
     },
+    // module: {
+    //     rules: styleLoader.styleLoader({
+    //         extract: true,
+    //         sourceMap: true
+    //     })
+    // },
     module: {
-        rules: styleLoader.styleLoader({
-            extract: true,
-            sourceMap: true
-        })
+        rules: [
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ]
+            }
+        ]
     },
-
     optimization: {
         runtimeChunk: {
             name: "manifest"
@@ -44,33 +59,6 @@ const prod = merge({}, baseConf, {
                 }
             }
         },
-        /*
-
-        optimization: {
-            splitChunks: {
-              chunks: "initial",         // 必须三选一： "initial" | "all"(默认就是all) | "async"
-              minSize: 0,                // 最小尺寸，默认0
-              minChunks: 1,              // 最小 chunk ，默认1
-              maxAsyncRequests: 1,       // 最大异步请求数， 默认1
-              maxInitialRequests: 1,    // 最大初始化请求书，默认1
-              name: () => {},              // 名称，此选项课接收 function
-              cacheGroups: {                 // 这里开始设置缓存的 chunks
-                priority: "0",                // 缓存组优先级 false | object |
-                vendor: {                   // key 为entry中定义的 入口名称
-                  chunks: "initial",        // 必须三选一： "initial" | "all" | "async"(默认就是异步)
-                  test: /react|lodash/,     // 正则规则验证，如果符合就提取 chunk
-                  name: "vendor",           // 要缓存的 分隔出来的 chunk 名称
-                  minSize: 0,
-                  minChunks: 1,
-                  enforce: true,
-                  maxAsyncRequests: 1,       // 最大异步请求数， 默认1
-                  maxInitialRequests: 1,    // 最大初始化请求书，默认1
-                  reuseExistingChunk: true   // 可设置是否重用该chunk（查看源码没有发现默认值）
-                }
-              }
-            }
-          },
-         */
     },
     plugins: [
         //压缩js
@@ -91,6 +79,11 @@ const prod = merge({}, baseConf, {
         //作用域提升,提升代码在浏览器执行速度
         new webpack.optimize.ModuleConcatenationPlugin(),
 
+        // webpack4.0版本以上采用MiniCssExtractPlugin 而不使用extract-text-webpack-plugin
+        new MiniCssExtractPlugin({
+            filename: utils.assetsPath('css/[name].[contenthash].css'),
+            chunkFilename: utils.assetsPath('css/[name].[contenthash].css')
+        }),
         //根据模块相对路径生成四位数hash值作为模块id
         new webpack.HashedModuleIdsPlugin(),
 
