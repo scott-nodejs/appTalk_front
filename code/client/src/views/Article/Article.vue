@@ -143,15 +143,16 @@ export default {
     },
     onUserThumbArticle () {
       /*用户like 文章*/
+        if (!this.personalInfo.islogin) {
+            this.$message.warning('请先登录，再继续操作');
+            return false
+        }
       this.$store
         .dispatch('common/SET_THUMB', {
           associate_id: this.article.id,
           type: modelType.article
         })
         .then(result => {
-          if(result.status === 401){
-              this.$message.warning('请先登录，再点赞')
-          }
           if (result.status === 200) {
             this.$store.dispatch('user/GET_ASSOCIATE_INFO')
           } else {

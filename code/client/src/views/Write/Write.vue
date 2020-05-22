@@ -19,6 +19,7 @@
 
         <div class="write mrg-bm20">
           <mavon-editor defaultOpen="edit"
+                        class="me-editor"
                         :boxShadow="false"
                         v-model="write.content"
                         :toolbars="toolbars"
@@ -498,6 +499,12 @@ export default {
         z-index: 251;
       }
     }
+  }
+
+  .me-editor {
+    z-index: 6 !important;
+    width: 100%;
+    height: 100%;
   }
 
   .box-input,

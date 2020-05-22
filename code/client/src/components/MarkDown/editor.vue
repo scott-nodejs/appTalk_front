@@ -71,7 +71,7 @@
              v-html="d_render"
              v-show="!s_html_code"
              :class="{'scroll-style': s_scrollStyle, 'scroll-style-border-radius': s_scrollStyle}"
-             class="v-show-content"
+             class="v-show-content article-content"
              :style="{'background-color': previewBackground}">
         </div>
         <div v-show="s_html_code"
@@ -268,7 +268,6 @@ export default {
     iRender () {
       var $vm = this;
       $vm.$render($vm.d_value, function (res) {
-        console.log('res', res)
         // render
         $vm.d_render = res;
         // change回调
@@ -340,7 +339,7 @@ export default {
       this.$refs.toolbar_left.$changeUrl(fileIndex, url)
       this.iRender()
     },
-    defaultOpen: function (val) {
+    defaultOpen (val) {
       let default_open_ = val;
       if (!default_open_) {
         default_open_ = this.subfield ? 'preview' : 'edit';

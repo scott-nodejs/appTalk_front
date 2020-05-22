@@ -83,6 +83,11 @@ export default {
         this.$message.warning('请填写评论内容')
         return false
       }
+        if (!this.personalInfo.islogin) {
+            this.commentContent = ''
+            this.$message.warning('请先登录，再继续操作');
+            return false
+        }
       var params = this.getParams()
       this.$store.dispatch("articleComment/ARTICLE_COMMENT_CREATE", params)
         .then(result => {
