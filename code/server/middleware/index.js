@@ -17,6 +17,7 @@ export default app => {
         exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
         maxAge: 5,
         credentials: true,
+        keepHeadersOnError: true,
         allowMethods: ['GET', 'POST', 'DELETE'],
         allowHeaders: ['Content-Type', 'Authorization', 'Accept','X-Requested-With','cookie'],
     }))

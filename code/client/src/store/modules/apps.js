@@ -21,7 +21,10 @@ const state = () => ({
     appsInfo: {
         url: '',
         name: '',
-        description: ''
+        description: '',
+        infos: '',
+        images: '',
+        score: 0.0
     }, // 小书的信息
     booksBookAll: [] // 小书的所有章节
 })

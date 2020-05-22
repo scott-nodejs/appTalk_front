@@ -86,8 +86,8 @@ export default {
       var params = this.getParams()
       this.$store.dispatch("articleComment/ARTICLE_COMMENT_CREATE", params)
         .then(result => {
-          this.commentContent = ''
-          this.$emit('commentChange', result)
+            this.commentContent = ''
+            this.$emit('commentChange', result)
         })
         .catch(err => {
           this.commentContent = ''

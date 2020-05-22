@@ -149,6 +149,9 @@ export default {
           type: modelType.article
         })
         .then(result => {
+          if(result.status === 401){
+              this.$message.warning('请先登录，再点赞')
+          }
           if (result.status === 200) {
             this.$store.dispatch('user/GET_ASSOCIATE_INFO')
           } else {

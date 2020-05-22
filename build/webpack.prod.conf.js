@@ -46,20 +46,48 @@ const prod = merge({}, baseConf, {
             }
         ]
     },
+    // optimization: {
+    //     runtimeChunk: {
+    //         name: "manifest"
+    //     },
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             commons: {
+    //                 test: /[\\/]node_modules[\\/]/,
+    //                 name: "vendor",
+    //                 chunks: "all"
+    //             }
+    //         }
+    //     },
+    // },
     optimization: {
-        runtimeChunk: {
-            name: "manifest"
-        },
         splitChunks: {
             cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: "vendor",
-                    chunks: "all"
+                vendor: {
+                    chunks: 'all',
+                    test: /node_modules/,
+                    name: 'vendor',
+                    minChunks: 1,
+                    maxInitialRequests: 5,
+                    minSize: 0,
+                    priority: 100
+                },
+                common: {
+                    chunks: 'all',
+                    test: /[\\/]src[\\/]js[\\/]/,
+                    name: 'common',
+                    minChunks: 2,
+                    maxInitialRequests: 5,
+                    minSize: 0,
+                    priority: 60
+                },
+                runtimeChunk: {
+                    name: 'manifest'
                 }
             }
-        },
+        }
     },
+    devtool: false,
     plugins: [
         //压缩js
         new UglifyJsPlugin({

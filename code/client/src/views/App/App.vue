@@ -2,7 +2,7 @@
   <div class="book-view">
     <div class="container  box-container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-8">
+        <div class="col-xs-12 col-sm-9 col-md-9">
           <div class="client-card">
             <div class="book-info">
               <div class="poster">
@@ -13,8 +13,7 @@
                   <a href="javascript:;"
                      class="title">
                     {{apps.appsInfo.name}}
-                    <!--<span class="free"-->
-                          <!--:class="Number(books.booksInfo.is_free)===isFree.free?'yes':''">{{isFreeText[books.booksInfo.is_free]}}</span>-->
+                    <span class="free">{{apps.appsInfo.score}}</span>
                     <!--<span class="price"-->
                           <!--v-if="Number(books.booksInfo.is_free)!==isFree.free">￥{{books.booksInfo.price}} {{payTypeText[books.booksInfo.pay_type]}}</span>-->
                   </a>
@@ -24,7 +23,11 @@
                         <!--:class="{'active':isCollect(books.booksInfo).status}">{{isCollect(books.booksInfo).text}}</span>-->
                 </div>
                 <div class="media">
-                  <div class="desc">{{apps.appsInfo.description}}</div>
+                  <div class="desc" v-for="(appInfos) in apps.appsInfo.infos">
+                    <span>{{appInfos.key}}</span>
+                    <span>&nbsp;&nbsp;</span>
+                    <span>{{appInfos.value}}</span>
+                  </div>
                   <!--<div class="author">-->
                     <!--<div class="author-info">-->
                       <!--<router-link :to="{name:'user',params:{uid:books.booksInfo.user.uid,routeType:'article'}}"-->
@@ -67,11 +70,11 @@
                      <!--@click="currentType='BookList'"-->
                      <!--:class="{'active':currentType==='BookList'}"><span class="text">目录</span></div>-->
                 <div class="item"
-                     @click="currentType='BookInfo'"
-                     :class="{'active':currentType==='BookInfo'}"><span class="text">介绍</span></div>
+                     @click="currentType='AppInfo'"
+                     :class="{'active':currentType==='AppInfo'}"><span class="text">介绍</span></div>
                 <div class="item"
-                     @click="currentType='BookComment'"
-                     :class="{'active':currentType==='BookComment'}"><span class="text">评论</span>
+                     @click="currentType='AppComment'"
+                     :class="{'active':currentType==='AppComment'}"><span class="text">评论</span>
                 </div>
               </div>
             </div>
@@ -83,7 +86,7 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="col-xs-12 col-sm-3 col-md-3">
           <website-notice />
         </div>
 
@@ -431,7 +434,7 @@ export default {
         flex-direction: column;
         .desc {
           margin-top: 10px;
-          min-height: 40px;
+          min-height: 20px;
           line-height: 20px;
           overflow: hidden;
           color: #71777c;

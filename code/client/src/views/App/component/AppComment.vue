@@ -1,6 +1,6 @@
 <template>
   <div class="book-comment">
-    <div class="book-content-head">APP评价</div>
+    <div class="book-content-head">暂无评论</div>
     <AppsComment />
   </div>
 </template>

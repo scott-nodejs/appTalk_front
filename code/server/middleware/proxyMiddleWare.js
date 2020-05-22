@@ -100,7 +100,7 @@ module.exports = function () {
           logger.info('ProxyRes headers:', '\n', JSON.stringify(ctx.response.headers, null, 2))
           const location = `${ctx._proxyTarget}${ctx.url}`
           logger.info(`Proxy request '${location}' completed(${proxyRes.statusCode}), costing ${Date.now() - ctx._proxyStartTime}ms.`)
-          if (!needToken) {
+            if(!needToken) {
             return proxyResData
           }
           return await proxyToken.handleResponse(ctx)
