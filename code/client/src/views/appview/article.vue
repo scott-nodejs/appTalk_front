@@ -6,6 +6,9 @@
                 <main class="main client-card">
                     <div class="article-view"
                          v-if="article.id">
+                        <div class="article-title">
+                           <h1>{{ article.title }}</h1>
+                        </div>
                         <article class="article-content box-article-view"
                                  v-html="article.htmlUrl"></article>
 
@@ -20,15 +23,12 @@
                        v-else>文章不存在</p>
                 </main>
             </div>
-            <div class="col-xs-12 col-sm-3--6 col-md-3--6 aside">
-                <ArticleAside />
-            </div>
         </div>
     </section>
 </template>
 
 <script>
-    import ArticleComment from '@views/Comment/ArticleComment'
+    import ArticleComment from '@views/appview/ArticleComment'
     import ArticleAside from '@views/Article/component/ArticleAside'
     import { mapState } from 'vuex'
     import googleMixin from '@mixins/google'
