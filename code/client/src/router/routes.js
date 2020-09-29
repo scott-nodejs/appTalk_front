@@ -108,4 +108,9 @@ export default [
         name: 'article1',
         component: require('@views/appview/article').default // 客户端文章内容页
     },
+    {
+        path: '/appview/app-desc/:apps_id',
+        name: 'app-desc1',
+        component: require('@views/appview/App').default // App详情
+    },
 ]
