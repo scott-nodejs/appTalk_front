@@ -102,5 +102,10 @@ export default [
         path: '/sign/reset-password',
         name: 'resetPassword',
         component: () => import('@views/Sign/ResetPassword') // 找回密码
-    }
+    },
+    {
+        path: '/appview/p/:aid',
+        name: 'article1',
+        component: require('@views/appview/article').default // 客户端文章内容页
+    },
 ]
