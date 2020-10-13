@@ -14,8 +14,8 @@ module.exports = {
     },
     build: {
         env: 'production',
-        publicPath: '/client/',
-        assetsPath: 'static',
+        publicPath: 'http://cdn.app.shuo.club/',
+        assetsPath: '',
         assetsSubDirectory: 'static',
         devtoolType: 'source-map'
     }
