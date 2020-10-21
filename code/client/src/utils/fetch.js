@@ -34,7 +34,7 @@ axios.interceptors.response.use(response => response, err => Promise.resolve(err
 //     return res
 // }
 
-let prefix = 'http://localhost:3000/api/'
+let prefix = 'http://www.appshuo.club/api/'
 let prefix1 = 'http://localhost:3000/node/'
 export default {
     get(url, params, cookies = {}) {

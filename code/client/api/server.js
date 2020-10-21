@@ -5,7 +5,7 @@ export default {
     api: null,
     cookies: {},
     getBaseUrl(){
-        return 'http://localhost:3000/api/'
+        return 'http://www.appshuo.club/api/'
     },
     setCookies(value) {
         // value = value || {}

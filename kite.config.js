@@ -15,10 +15,10 @@ module.exports = {
   },
   env: NODE_ENV,
   THEME_NAME,
-  publicStatic: ProcessCwd('static'),
+  publicStatic: ProcessCwd(''),
   client: {
     port: 8081, // 前台调试端口号
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: '',
     proxy: {
       target: `http://localhost:8086`, // client ssr
       changeOrigin: true,
