@@ -15,9 +15,6 @@
                         <div class="show-foot clearfix">
                             <div class="copyright">© 著作权归作者所有</div>
                         </div>
-                        <!--article footer end-->
-                        <!--文章评论-->
-                        <ArticleComment />
                     </div>
                     <p class="no-aricle"
                        v-else>文章不存在</p>
