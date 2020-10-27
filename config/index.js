@@ -2,7 +2,7 @@ const path = require('path')
 module.exports = {
     base: {
         path: path.resolve(__dirname, '../public/client'),
-        publicPath: 'http://cdn.app.shuo.club/',
+        publicPath: 'http://cdn.appshuo.club/',
         assetsPath: ''
     },
     dev: {
@@ -14,7 +14,7 @@ module.exports = {
     },
     build: {
         env: 'production',
-        publicPath: 'http://cdn.app.shuo.club/',
+        publicPath: 'http://cdn.appshuo.club/',
         assetsPath: '',
         assetsSubDirectory: '',
         devtoolType: 'source-map'
