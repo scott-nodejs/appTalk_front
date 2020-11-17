@@ -10,17 +10,18 @@ export default app => {
         await next()
     })
 
-    app.use(cors({
-        origin: function (ctx) {
-            return "*"; // 允许来自所有域名请求
-        },
-        exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-        maxAge: 5,
-        credentials: true,
-        keepHeadersOnError: true,
-        allowMethods: ['GET', 'POST', 'DELETE'],
-        allowHeaders: ['Content-Type', 'Authorization', 'Accept','X-Requested-With','cookie'],
-    }))
+    // app.use(cors({
+    //     origin: function (ctx) {
+    //         return "*"; // 允许来自所有域名请求
+    //     },
+    //     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    //     maxAge: 5,
+    //     credentials: true,
+    //     keepHeadersOnError: true,
+    //     allowMethods: ['GET', 'POST', 'DELETE'],
+    //     allowHeaders: ['Content-Type', 'Authorization', 'Accept','X-Requested-With','cookie'],
+    // }))
+    app.use(cors())
 
     //gzip压缩
     // app.use(compress())
