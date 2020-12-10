@@ -7,11 +7,10 @@
                     <div class="article-view"
                          v-if="article.id">
                         <div class="article-title">
-                           <h2>{{ article.title }}</h2>
+                           <h1>{{ article.title }}</h1>
                         </div>
                         <div class="article-title">
-                            <img v-if="article.cover"
-                                 v-lazy="article.cover"
+                            <img v-lazy="article.cover"
                                  class="box-image"
                                  alt="">
                         </div>
