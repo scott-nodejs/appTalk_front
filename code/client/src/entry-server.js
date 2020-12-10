@@ -33,12 +33,11 @@ export default context => {
         if (fullPath !== url && fullPath !== '/404') {
             return reject({ url: fullPath })
         }
-        // 设置服务器端 router 的位置
-        console.log("url" + url)
         router.push(url)
-
-        // 等到 router 将可能的异步组件和钩子函数解析完
         router.onReady(() => {
+
+            // 设置服务器端 router 的位置
+            // 等到 router 将可能的异步组件和钩子函数解析完
             const matchedComponents = router.getMatchedComponents()
             if (!matchedComponents.length) {
                 return reject({ code: 404 })

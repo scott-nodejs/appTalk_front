@@ -15,6 +15,22 @@
             </div>
           </div>
         </div>
+
+        <div class="btn-group"
+             v-if="userInfo.uid != this.personalInfo.user.uid">
+          <button class="btn btn-private-chat"
+                  @click="privateChat">
+            <i class="iconfont"></i>
+            <span>打赏</span>
+          </button>
+          <button class="btn"
+                  @click="onUserAttention(isAttention.is_attention)"
+                  :class="isAttention.is_attention ? 'has' : 'no'">
+            <i class="iconfont"></i>
+            <span>{{ isAttention.text }}</span>
+          </button>
+        </div>
+
         <div class="stat-item item">
           <i class="el-icon-document"></i>
           <span class="content">文章总数 <em class="count">{{userInfo.articleCount||0}}</em></span>
@@ -67,26 +83,88 @@ export default {
     }
   },
   mounted () {
-    this.getUserInfo() // 获取用户的信息
+    //this.getUserInfo() // 获取用户的信息
   },
   watch: {
-    $route (to, from) {
-      this.getUserInfo()
-    }
+    // $route (to, from) {
+    //   this.getUserInfo()
+    // }
   },
   computed: {
-    article () {
-      return this.$store.state.article.article || {}
-    },
-    ...mapState(['website', 'personalInfo', 'user'])
+      article () {
+        return this.$store.state.article.article || {}
+      },
+      ...mapState(['website', 'personalInfo', 'user']),
+      isAttention () {
+          // 是否关注
+          if (
+              ~this.user.associateInfo.userAttentionId.indexOf(
+                  String(this.userInfo.uid)
+              )
+          ) {
+              return {
+                  is_attention: true,
+                  text: '已关注'
+              }
+          } else {
+              return {
+                  is_attention: false,
+                  text: '关注'
+              }
+          }
+      }
   },
   methods: {
-    getUserInfo () {
-      this.$store.dispatch('user/GET_USER_INFO', { uid: this.article.authorId }).then(result => {
-        this.userInfo = result.data.userInfo || {}
-        this.recommendArticle = result.data.recommendArticle || []
-      })
-    }
+      privateChat () {
+          if (!this.personalInfo.islogin) {
+              this.$router.push({ name: 'signIn' })
+              return false
+          }
+          if (this.userInfo.uid == this.personalInfo.user.uid) {
+              this.$message.error('自己不能和自己私聊')
+              return false
+          }
+          this.$router.push({
+              name: 'privateChat',
+              query: { uid: this.userInfo.uid, nickname: this.userInfo.nickname }
+          })
+      },
+      onUserAttention (type) {
+          if (!this.personalInfo.islogin) {
+              this.$router.push({ name: 'signIn' })
+              return false
+          }
+          if (this.userInfo.uid == this.personalInfo.user.uid) {
+              this.$message.error('自己不能关注自己')
+              return false
+          }
+          /*用户关注用户*/
+          this.$confirm(type ? '是否取消关注?' : '是否关注?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+          }).then(() => {
+              this.$store
+                  .dispatch('common/SET_ATTENTION', {
+                      associate_id: this.userInfo.uid,
+                      type: modelName.user
+                  })
+                  .then(result => {
+                      if (result.state === 'success') {
+                          this.$store.dispatch('user/GET_ASSOCIATE_INFO')
+                          this.$message.success(result.message)
+                      } else {
+                          this.$message.warning(result.message)
+                      }
+                  })
+          })
+      },
+    // getUserInfo () {
+    //   this.$store.dispatch('user/GET_USER_INFO', { uid: this.article.authorId }).then(result => {
+    //     this.userInfo = result.data.userInfo || {}
+    //     this.recommendArticle = result.data.recommendArticle || []
+    //   })
+    // }
   }
 }
 </script>
@@ -105,6 +183,38 @@ export default {
     .item {
       display: flex;
       align-items: center;
+    }
+  }
+  .btn-group {
+    padding-left: 15px;
+    padding-bottom: 15px;
+    .btn {
+      display: inline-block;
+      font-size: 13px;
+      outline: 0;
+      border: 1px solid #00bb29;
+      border-radius: 3px;
+      padding: 2px 10px;
+      color: #888585;
+      margin-right: 10px;
+      &.btn-private-chat {
+        background: #fff;
+        color: #00bb29;
+      }
+      &.off {
+        background: #999;
+        border: 1px solid #ccc;
+      }
+      &.has {
+        background: #ccc;
+        color: #666;
+        border: 1px solid #ccc;
+      }
+      &.no {
+        background: #00bb29;
+        color: #fff;
+        border: 1px solid #00bb29;
+      }
     }
   }
   .author-block {
