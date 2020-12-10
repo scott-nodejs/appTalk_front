@@ -9,11 +9,6 @@
                         <div class="article-title">
                            <h1>{{ article.title }}</h1>
                         </div>
-                        <div class="article-title">
-                            <img v-lazy="article.cover"
-                                 class="box-image"
-                                 alt="">
-                        </div>
                         <article class="article-content box-article-view"
                                  v-html="article.htmlUrl"></article>
 
