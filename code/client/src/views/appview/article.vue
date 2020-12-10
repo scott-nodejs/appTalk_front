@@ -8,7 +8,9 @@
                          v-if="article.id">
                         <div class="article-title">
                            <h2>{{ article.title }}</h2>
-                            <img v-if="article.cover != null"
+                        </div>
+                        <div class="article-title">
+                            <img v-if="article.cover"
                                  v-lazy="article.cover"
                                  class="box-image"
                                  alt="">
