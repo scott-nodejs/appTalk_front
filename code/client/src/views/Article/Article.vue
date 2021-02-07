@@ -121,11 +121,11 @@ export default {
     }
   },
   methods: {
-    getArticle () {
-      this.$store.dispatch('article/GET_ARTICLE', {
-        aid: this.$route.params.aid
-      })
-    },
+    // getArticle () {
+    //   this.$store.dispatch('article/GET_ARTICLE', {
+    //     aid: this.$route.params.aid
+    //   })
+    // },
     isThumb (item) {
       // 是否收藏
       if (this.personalInfo.islogin) {

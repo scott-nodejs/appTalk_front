@@ -267,25 +267,23 @@ export default {
     isEditArticle () {
       if (this.$route.params.type !== 'create') {
         // 判断是不是创建，不是则是修改，同时赋值
+
         this.$store
           .dispatch('editor/GET_USER_ARTICLE', {
             id: this.$route.params.type
           })
           .then(result => {
-            console.log(result.data)
             this.write = result.data
             this.editArticleInfo = result.data
             this.write.is_public = Number(result.data.isPublic)
             this.write.content = result.data.originContent
-            // this.articleTagAll.map(item => {
-            //   if (
-            //     ~this.editArticleInfo.tag_ids
-            //       .split(',')
-            //       .indexOf(String(item.tag_id))
-            //   ) {
-            //     this.currentArticleTagArr.push(item)
-            //   }
-            // })
+              this.articleTagAll.map(item => {
+                  if (
+                      ~this.editArticleInfo.tagIds.split(',').indexOf(String(item.id))
+                  ) {
+                      this.currentArticleTagArr.push(item)
+                  }
+              })
             this.renderCurrentArticleTag()
           })
       }

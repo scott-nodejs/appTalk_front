@@ -23,7 +23,7 @@ if (needToken) {
 module.exports = function () {
   async function preProxyMiddleware(ctx, next) {
     const url = ctx.url
-    logger.info(`Request '${url}'`)
+    //logger.info(`Request '${url}'`)
     let proxyTarget
     let proxyConfig = appConfig.proxy
     // 在appConfig.proxy中寻找匹配前缀的代理
@@ -33,7 +33,7 @@ module.exports = function () {
         ctx.url = url.replace(prefix, '')
         proxyTarget = target
         ctx._proxyTarget = proxyTarget
-        logger.info(`Match to proxy: '${prefix}' => '${proxyTarget}'`)
+        //logger.info(`Match to proxy: '${prefix}' => '${proxyTarget}'`)
         break
       }
     }
@@ -41,7 +41,7 @@ module.exports = function () {
       logger.info('Proxy not found')
       return Promise.resolve()
     }
-    logger.info(`Will be Agent to '${proxyTarget + ctx.url}'`)
+    //logger.info(`Will be Agent to '${proxyTarget + ctx.url}'`)
     return next()
   }
 
@@ -73,7 +73,6 @@ module.exports = function () {
                 delete proxyReqOpts.headers.Referer
                 delete proxyReqOpts.headers.Origin
             }
-          console.log("proxyReqOpts: "+JSON.stringify(proxyReqOpts))
             // 计时开始
           ctx._proxyStartTime = Date.now()
             if (!needToken) {
@@ -82,7 +81,6 @@ module.exports = function () {
             // 去掉Referer头，否则可能会造成CSRF问题，影响开发
             return await proxyToken.handleRequest(ctx)
             .then((additionalHeaders) => {
-              console.log("addition: "+JSON.stringify(additionalHeaders))
               Object.assign(proxyReqOpts.headers, additionalHeaders)
             })
             .then(() => {
@@ -97,9 +95,9 @@ module.exports = function () {
          * @return {Promise.<*>} *
          */
         async userResDecorator(proxyRes, proxyResData, ctx) {
-          logger.info('ProxyRes headers:', '\n', JSON.stringify(ctx.response.headers, null, 2))
+          //logger.info('ProxyRes headers:', '\n', JSON.stringify(ctx.response.headers, null, 2))
           const location = `${ctx._proxyTarget}${ctx.url}`
-          logger.info(`Proxy request '${location}' completed(${proxyRes.statusCode}), costing ${Date.now() - ctx._proxyStartTime}ms.`)
+          //logger.info(`Proxy request '${location}' completed(${proxyRes.statusCode}), costing ${Date.now() - ctx._proxyStartTime}ms.`)
             if(!needToken) {
             return proxyResData
           }
